@@ -4,9 +4,18 @@ Dockerfile for developing python applications and libraries for Apache Spark:
 
 - includes latest [Apache Spark](https://spark.apache.org/) and [Apache Hadoop](https://hadoop.apache.org/) libraries
 - uses [poetry](https://python-poetry.org/) for modern python development and packaging
+- uses Ubuntu 18.04 OS
+
+This Dockerfile was created to aid with local testing and continuous integration of
+applications that target Spark and Hadoop clusters running on Ubuntu machines.
+It is not intended for production use.
+
+To get started, check out example below.
 
 
 ## Example usage
+
+This example shows how to configure testing for a newly created python app.
 
 Create a new poetry project:
 ```shell
@@ -32,18 +41,17 @@ def test_spark(spark_context):
     assert spark_context.parallelize(range(3)).collect() == [0, 1, 2]
 ```
 
-Create a `Dockerfile` in your project:
+Create a `Dockerfile` for your project:
 ```Dockerfile
 FROM kowaalczyk/pyspark-dev:latest
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/my-app
 
 # copy poetry settings and install dependencies (so that they will be cached)
 ADD pyproject.toml poetry.lock ./
 RUN poetry install --no-interaction --no-ansi
 
 # add project source code and tests
-ADD .flake8 mypy.ini ./
 ADD tests ./tests
 ADD app ./app
 ```
@@ -58,7 +66,10 @@ Run poetry commands in the docker container:
 docker run my-app:latest poetry run pytest
 ```
 
-This example is based on `kowaalczyk/spark-minimal-algorithms` python package.
+You should see output from pytest in your terminal (hopefully saying that all tests passed).
+
+The example is based on [`spark-minimal-algorithms`](https://github.com/kowaalczyk/spark-minimal-algorithms)
+python package, you can see the project's github repo to see examples of more advanced usage.
 
 
 ## Details
@@ -70,7 +81,7 @@ This example is based on `kowaalczyk/spark-minimal-algorithms` python package.
 
 ## Legal note
 
-This project is not associated or maintained by Apache Software Foundation.
+This project is neither maintained by nor associated with the Apache Software Foundation.
 
 Apache Hadoop, Hadoop, Apache, the Apache feather logo, and the Apache Hadoop project logo are either registered trademarks or trademarks of the Apache Software Foundation in the United States and other countries.
 

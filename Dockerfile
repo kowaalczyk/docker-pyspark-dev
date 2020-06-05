@@ -12,7 +12,8 @@ ENV JRE_HOME "/usr/lib/jvm/java-8-openjdk-amd64/jre/"
 RUN apt install -y scala
 
 # copy and install spark + hadoop
-RUN wget -O '/usr/src/spark/spark-2.4.5-bin-hadoop2.7.tgz' https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
+RUN mkdir /usr/src/spark
+RUN wget -q -O /usr/src/spark/spark-2.4.5-bin-hadoop2.7.tgz https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
 RUN tar -xzf /usr/src/spark/spark-2.4.5-bin-hadoop2.7.tgz -C /usr/src/spark
 RUN rm /usr/src/spark/spark-2.4.5-bin-hadoop2.7.tgz
 ENV SPARK_HOME="/usr/src/spark/spark-2.4.5-bin-hadoop2.7"
