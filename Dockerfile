@@ -23,6 +23,3 @@ ENV PYSPARK_SUBMIT_ARGS="--master local[2] pyspark-shell"
 # install & configure poetry
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
-
-# work in the project directory from now on
-WORKDIR "/usr/src/spark-minimal-algorithms"
