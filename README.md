@@ -1,5 +1,8 @@
 # docker-pyspark-dev
 
+![Docker Pulls](https://img.shields.io/docker/pulls/kowaalczyk/pyspark-dev?style=for-the-badge)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/kowaalczyk/pyspark-dev?sort=date&style=for-the-badge)
+
 Dockerfile for developing python applications and libraries for Apache Spark:
 
 - includes latest [Apache Spark](https://spark.apache.org/) and [Apache Hadoop](https://hadoop.apache.org/) libraries
